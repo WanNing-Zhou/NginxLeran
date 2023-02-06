@@ -64,6 +64,83 @@
 > 5.重新加载nginx  
 > `./nginx -s reload`
 
+# nginx 配置文件
+
+> 1. nginx配置文件的位置
+
+`/usr/local/nginx/conf/nginx.conf` 
+
+ ![配置文件位置](./mark_imgs/img_4.png)
+
+> 2. nginx配置文件组成
+
+1. nginx配置文件有三部分组成
+
+- 第一部分 全局块  
+  - 从配置文件到 events 块之间的内容,主要会设置一些影响nginx服务器整体运行的配置命令  
+  比如:  
+  `worker_processes  1;`  
+  这是Nginx服务器并发处理服务的相关配置,worker_processes值越大,可以支持的并发处理量也越多,但是会受到硬件软件等设备的制约  
+  
+- 第二部分 events块  
+  - events 块设涉及的指令主要影响Nginx服务器于用户的网络连接  
+  比如:  
+  `worker_connections  1024;`  
+  标识每个work process支持的最大连接数为1024
+- 
+- 第三部分 http块
+  - 这算是 Nginx 服务器配置中最频繁的部分,代理,缓存和日志定义等绝大多多数功能和第三方模块的配置都在这里
+  - 需要注意的是: http块也可以包括http全局块,server块
+  - 1.http全局块
+    - http全局块配置的指令包括文件引入,MIME-TYPE定义,日志自定义,连接超时事件,单连链接请求上限等  
+```
+   http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+     ...
+     }
+```
+- 
+  - server 块  
+    - 这块和虚拟主机有密切关系,虚拟主机从用户角度看,和一台独立的硬件主机是完全一样的,该技术的产生是为了节省互联网服务器硬件的成本
+    - 每个 http 块可以包括多个 server 块,而每个 server 块相当于一个虚拟主机
+    - 而每个 server 块也可分为全局 server 块,以及可以同时包含多个 location 块
+    -  1.全局server块
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
