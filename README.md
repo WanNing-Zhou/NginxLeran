@@ -122,8 +122,27 @@
     -  1.全局server块
 
 
+# Nginx 配置实例-反向代理
 
+```
+  1.实现效果
+    1) 打开六拉你去,再浏览器输入地址,www.123.com,跳转Linux系统tomcat主页面中
+  2.准备哦概念股走
+    1) 再linux系统安装tomcat,使用默认端口8080
+    *tomcat安装文件放到linux系统中,解压
+    *进入tomcat的bin目录中 ./startup.sh启动tomcat服务器
+    2)对外开放访问的端口
+    firewall-cmd --zone=public --add-port=8080/tcp --permanent 开放8080端口
+    firewall-cmd --list-ports 查看已开启的端口
+     firewall-cmd --reload  重启防火墙
+     
+     浏览器访问虚拟机IP:8080
+     
+```
 
+访问过程
+
+![访问过程](./mark_imgs/img_5.png)
 
 
 
