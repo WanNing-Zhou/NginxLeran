@@ -35,3 +35,20 @@
 
 ![动静分离](./mark_imgs/img_3.png)
 
+# nginx 的安装
+
+> 1.使用远程连接工具连接linux操作系统
+> 2.nginx相关素材
+> > pcre-8.37.tar.gz
+> > opnssl-1.0.1t.tar.gz
+> > zlib.1.2.3.tar.gz
+> > nginx.1.11.1.tar.gz
+> 3.安装nginx  
+> > [nginx安装](https://zhuanlan.zhihu.com/p/83890573)  
+> > [开放80端口](https://blog.csdn.net/weixin_38750084/article/details/90387056)
+
+
+
+
+
+
