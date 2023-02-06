@@ -47,6 +47,22 @@
 > > [nginx安装](https://zhuanlan.zhihu.com/p/83890573)  
 > > [开放80端口](https://blog.csdn.net/weixin_38750084/article/details/90387056)
 
+# nginx 操作的常用命令
+
+> 1.使用nginx操作命令前提条件 必须进入nginx的目录
+> `cd /usr/local/nginx/sbin/` 
+>  
+> 2.查看nginx的版本号   
+> `./nginx -v`  
+> 
+> 3.启动nginx  
+> `./nginx`  
+> 
+> 4.关闭nginx  
+> `./nginx -s stop`  
+> 
+> 5.重新加载nginx  
+> `./nginx -s reload`
 
 
 
