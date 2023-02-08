@@ -222,6 +222,15 @@ location [ = | ~ | ~* | ^~] uri {
 > 2.weight  
 > weight代表权重,默认为1.权重越高分配的客户端越多
 > 指定轮询记录,weight和访问比率成正比,用于后端服务器性能不均的情况 例如:  
+> ![负载均衡配置](./mark_imgs/img_10.png)
+> 
+> 3.ip_hash
+> 每个请求按访问ip的hash结果分配,这样每个访客固定访问一个后端服务器,可以解决session的问题,例如:
+> ![ip_hash](./mark_imgs/img_11.png)
+> 
+> 4.fair(第三方)  
+> 按后端服务器的响应时间来分配请求,响应时间段的优先分配
+> ![fair](./mark_imgs/img_12.png)
 > 
 > 
 
