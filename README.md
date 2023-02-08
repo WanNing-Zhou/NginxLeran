@@ -290,10 +290,44 @@ nginx可能会宕机
       1. 启动keepalived: `systemctl start keepalived.service`
 
    
+# nginx原理
+
+1. master & worker
+![img_1.png](./mark16_imgs/img_1.png)
+
+2. worker如何进行工作
+![worker工作](./mark_imgs/img_16.png)
+
+3. 一个master和多个workers的机制的好处
+
+首先对于与每个worker进程来说,独立的进程,不需要加所,所以省掉了锁带来的开销
+同时在编程以及问题查找时,也会方便很多,其次,采用独立的进程,可以让互相之间不会影响
+一个进程退出后,其他进程还在工作,服务不会中断,master金册灰姑娘则很亏啊启动新的worker进程
+当然,worker进程的异常退出,肯定是程序有but了,异常退出会导致当前worker上所有请求失败,不过不会影响到所有请求,
+所以降低了风险
+
+- 可以使用nginx -s reload热部署,利于nginx进行热部署操作
+- 每个worker是独立的进程,如果有其中一个worker出现问题,其他worker独立的进行争抢,
+
+2. 允许设置多少个worker  
+Nginx 同 redis 类似采用了io多路复用机制,每个worker都是一个独立的进程,但每个进程
+里都只有一个主线程,通过异步非阻塞的方式来处理请求,即使是成千上万个请求也不在话下,每个worker的线程
+可以把一个cpu的性能发挥到机制,所以worker数和服务器的cpu数量相等是最为适宜的,设少了会浪费cpu,
+设多了会造成cpu频繁切换上下文带来损耗
 
 
+3. 连接数 worker_connection  
+这个值表示每个worker进程所能连接的最大值,所以一个nginx能建立的最大链接数应该是worker_connections * worker_provesses,当然这里说的是最大连接数
+4. ,对于HTTP请求本地资源来说,能够支持的最大并发数量是 worker_connections * worker_processes 如果是支持http1.1的浏览器每次访问要占两个连接,所以普通
+5. 的静态访问最大并发数是: worker_connections * worker_processes/2, 而如果是http作为反向代理来说,最大并发数量应该是worker_connections* worker_processes/4
+因为作为反向代理服务器,每个并发会建立于客户端的连接和与后端服务的连接会占用两个连接
 
-
+6. worker_connection:
+    - 发送请求,占用了worker的几个连接数?
+      - 2或者4个
+    - nginx有一个master,有四个worker 每个worker支持最大的连接数据1024,支持的最大并发数是多少
+      - 最大连接数 4 * 1024
+      - 最大并发数 /2 或者/4
 
 
 
