@@ -270,7 +270,26 @@ nginx可能会宕机
 
 
 3. 完成高可用配置
+   1. 配置/etc/下的/keepalived/keepalived.conf文件
+   2. 在/usr/local/src添加检测脚本
+   ```
+     #!/bin/bash
+    counter=$(ps -C nginx |grep -v PID |wc -l)
+    if [ $counter == 0 ];then     
+      /usr/local/nginx/sbin/nginx
+    sleep 30  
+       counter=$(ps -C nginx |grep -v PID |wc -l)
+    if [ $counter == 0 ];then  
+         systemctl stop keepalived
+        fi
+    fi
+      
+   ```
+   
+   1) 把两台服务器启动
+      1. 启动keepalived: `systemctl start keepalived.service`
 
+   
 
 
 
