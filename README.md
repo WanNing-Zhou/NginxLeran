@@ -255,6 +255,25 @@ location [ = | ~ | ~* | ^~] uri {
 2) 配置问价autoindex on 列出文件夹的位置
 
 
+# Nginx 配置高可用的集群
+
+nginx可能会宕机
+
+![img.png](./mark_imgs/img_15.png)
+
+2. 配置高可用的准备工作
+  1) 需要两个虚拟机的环境
+  2) 两台服务器安装nginx
+  3) 两台服务器安装keepalived `yum install keepalived -y`
+  4) 安装keepalived后,会在etc里面生成目录keepalived,有文件keepalived.conf
+  5) 命令: `yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel`
+
+
+3. 完成高可用配置
+
+
+
+
 
 
 
